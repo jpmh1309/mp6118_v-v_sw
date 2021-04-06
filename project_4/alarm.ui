@@ -703,58 +703,6 @@ QProgressBar::chunk {
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>150</y>
-      <width>341</width>
-      <height>98</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout_2">
-     <item row="1" column="0" alignment="Qt::AlignHCenter">
-      <widget class="QLabel" name="label_4">
-       <property name="styleSheet">
-        <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
-       </property>
-       <property name="text">
-        <string>ARMADA</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1" alignment="Qt::AlignHCenter">
-      <widget class="QLabel" name="label_3">
-       <property name="styleSheet">
-        <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
-       </property>
-       <property name="text">
-        <string>BATERIA</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="label_7">
-       <property name="styleSheet">
-        <string notr="true">QLabel {background-color : yellow; border-color : black; border-width : 1px; border-style : solid; border-radius : 10px; min-height: 20px; min-width: 20px}</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_8">
-       <property name="styleSheet">
-        <string notr="true">QLabel {background-color : yellow; border-color : black; border-width : 1px; border-style : solid; border-radius : 10px; min-height: 20px; min-width: 20px}</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
       <x>290</x>
       <y>60</y>
       <width>71</width>
@@ -793,6 +741,70 @@ QProgressBar::chunk {
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>200</y>
+      <width>351</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item alignment="Qt::AlignHCenter">
+      <widget class="QLabel" name="label_4">
+       <property name="styleSheet">
+        <string notr="true">font: 12pt bold &quot;Tlwg Mono&quot;;</string>
+       </property>
+       <property name="text">
+        <string>ARMADA</string>
+       </property>
+      </widget>
+     </item>
+     <item alignment="Qt::AlignHCenter">
+      <widget class="QLabel" name="label_3">
+       <property name="styleSheet">
+        <string notr="true">font: 12pt bold &quot;Tlwg Mono&quot;;</string>
+       </property>
+       <property name="text">
+        <string>BATERIA</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>150</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel {background-color : yellow; border-color : black; border-width : 1px; border-style : solid; border-radius : 10px; min-height: 20px; min-width: 20px}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>150</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel {background-color : yellow; border-color : black; border-width : 1px; border-style : solid; border-radius : 10px; min-height: 20px; min-width: 20px}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -843,18 +855,34 @@ QProgressBar::chunk {
    </hints>
   </connection>
   <connection>
-   <sender>horizontalSlider</sender>
-   <signal>windowIconTextChanged(QString)</signal>
+   <sender>checkBox_2</sender>
+   <signal>stateChanged(int)</signal>
    <receiver>label_7</receiver>
-   <slot>setText(QString)</slot>
+   <slot>hide()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>190</x>
-     <y>351</y>
+     <x>83</x>
+     <y>410</y>
     </hint>
     <hint type="destinationlabel">
      <x>276</x>
      <y>210</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_2</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>label_7</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>83</x>
+     <y>410</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>219</y>
     </hint>
    </hints>
   </connection>
