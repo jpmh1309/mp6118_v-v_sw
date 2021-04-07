@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLCDNumber" name="lcdNumber">
+   <widget class="QLCDNumber" name="lcd_screen">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -51,7 +51,7 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="key_escape">
        <property name="styleSheet">
         <string notr="true">font: 18pt &quot;Tlwg Mono&quot;;</string>
        </property>
@@ -61,7 +61,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="key_enter">
        <property name="styleSheet">
         <string notr="true">font: 18pt &quot;Tlwg Mono&quot;;</string>
        </property>
@@ -71,7 +71,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="key_panic">
        <property name="styleSheet">
         <string notr="true">font: 18pt &quot;Tlwg Mono&quot;;</string>
        </property>
@@ -81,7 +81,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_4">
+      <widget class="QPushButton" name="key_fire">
        <property name="styleSheet">
         <string notr="true">font: 18pt &quot;Tlwg Mono&quot;;</string>
        </property>
@@ -113,7 +113,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QSlider" name="horizontalSlider">
+      <widget class="QSlider" name="battery_percentage_simulation">
        <property name="styleSheet">
         <string notr="true">QSlider::groove:horizontal {
     border: 1px solid #999999;
@@ -148,7 +148,7 @@ QSlider::handle:horizontal {
     </property>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
-      <widget class="QToolButton" name="toolButton_2">
+      <widget class="QToolButton" name="key_1">
        <property name="styleSheet">
         <string notr="true">QToolButton {
 font: 18pt &quot;Tlwg Mono&quot;; 
@@ -179,7 +179,7 @@ QToolButton::pressed {
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QToolButton" name="toolButton_5">
+      <widget class="QToolButton" name="key_4">
        <property name="styleSheet">
         <string notr="true">QToolButton {
 font: 18pt &quot;Tlwg Mono&quot;; 
@@ -204,7 +204,7 @@ QToolButton::pressed {
       </widget>
      </item>
      <item row="2" column="2">
-      <widget class="QToolButton" name="toolButton_9">
+      <widget class="QToolButton" name="key_9">
        <property name="styleSheet">
         <string notr="true">QToolButton {
 font: 18pt &quot;Tlwg Mono&quot;; 
@@ -229,7 +229,7 @@ QToolButton::pressed {
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QToolButton" name="toolButton_13">
+      <widget class="QToolButton" name="key_0">
        <property name="styleSheet">
         <string notr="true">QToolButton {
 font: 18pt &quot;Tlwg Mono&quot;; 
@@ -254,7 +254,7 @@ QToolButton::pressed {
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QToolButton" name="toolButton_3">
+      <widget class="QToolButton" name="key_2">
        <property name="styleSheet">
         <string notr="true">QToolButton {
 font: 18pt &quot;Tlwg Mono&quot;; 
@@ -279,7 +279,7 @@ QToolButton::pressed {
       </widget>
      </item>
      <item row="0" column="2">
-      <widget class="QToolButton" name="toolButton_4">
+      <widget class="QToolButton" name="key_3">
        <property name="styleSheet">
         <string notr="true">QToolButton {
 font: 18pt &quot;Tlwg Mono&quot;; 
@@ -304,7 +304,7 @@ QToolButton::pressed {
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QToolButton" name="toolButton_10">
+      <widget class="QToolButton" name="key_8">
        <property name="styleSheet">
         <string notr="true">QToolButton {
 font: 18pt &quot;Tlwg Mono&quot;; 
@@ -329,7 +329,7 @@ QToolButton::pressed {
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QToolButton" name="toolButton_7">
+      <widget class="QToolButton" name="key_5">
        <property name="styleSheet">
         <string notr="true">QToolButton {
 font: 18pt &quot;Tlwg Mono&quot;; 
@@ -354,7 +354,7 @@ QToolButton::pressed {
       </widget>
      </item>
      <item row="3" column="2">
-      <widget class="QToolButton" name="toolButton_12">
+      <widget class="QToolButton" name="key_pound">
        <property name="styleSheet">
         <string notr="true">QToolButton {
 font: 18pt &quot;Tlwg Mono&quot;; 
@@ -379,7 +379,7 @@ QToolButton::pressed {
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QToolButton" name="toolButton_11">
+      <widget class="QToolButton" name="key_start">
        <property name="styleSheet">
         <string notr="true">QToolButton {
 font: 18pt &quot;Tlwg Mono&quot;; 
@@ -404,7 +404,7 @@ QToolButton::pressed {
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="QToolButton" name="toolButton_6">
+      <widget class="QToolButton" name="key_6">
        <property name="styleSheet">
         <string notr="true">QToolButton {
 font: 18pt &quot;Tlwg Mono&quot;; 
@@ -429,7 +429,7 @@ QToolButton::pressed {
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QToolButton" name="toolButton_8">
+      <widget class="QToolButton" name="key_7">
        <property name="styleSheet">
         <string notr="true">QToolButton {
 font: 18pt &quot;Tlwg Mono&quot;; 
@@ -478,7 +478,7 @@ QToolButton::pressed {
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QCheckBox" name="checkBox">
+        <widget class="QCheckBox" name="sensor_1">
          <property name="styleSheet">
           <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
          </property>
@@ -488,7 +488,7 @@ QToolButton::pressed {
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_2">
+        <widget class="QCheckBox" name="sensor_2">
          <property name="styleSheet">
           <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
          </property>
@@ -498,7 +498,7 @@ QToolButton::pressed {
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_3">
+        <widget class="QCheckBox" name="sensor_3">
          <property name="styleSheet">
           <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
          </property>
@@ -508,7 +508,7 @@ QToolButton::pressed {
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_4">
+        <widget class="QCheckBox" name="sensor_4">
          <property name="styleSheet">
           <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
          </property>
@@ -518,7 +518,7 @@ QToolButton::pressed {
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_5">
+        <widget class="QCheckBox" name="sensor_5">
          <property name="styleSheet">
           <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
          </property>
@@ -528,7 +528,7 @@ QToolButton::pressed {
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_6">
+        <widget class="QCheckBox" name="sensor_6">
          <property name="styleSheet">
           <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
          </property>
@@ -538,7 +538,7 @@ QToolButton::pressed {
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_8">
+        <widget class="QCheckBox" name="sensor_7">
          <property name="styleSheet">
           <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
          </property>
@@ -548,7 +548,7 @@ QToolButton::pressed {
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_7">
+        <widget class="QCheckBox" name="sensor_8">
          <property name="styleSheet">
           <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
          </property>
@@ -558,7 +558,7 @@ QToolButton::pressed {
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_10">
+        <widget class="QCheckBox" name="sensor_9">
          <property name="styleSheet">
           <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
          </property>
@@ -568,7 +568,7 @@ QToolButton::pressed {
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_11">
+        <widget class="QCheckBox" name="sensor_10">
          <property name="styleSheet">
           <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
          </property>
@@ -578,7 +578,7 @@ QToolButton::pressed {
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_15">
+        <widget class="QCheckBox" name="sensor_11">
          <property name="styleSheet">
           <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
          </property>
@@ -588,7 +588,7 @@ QToolButton::pressed {
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_12">
+        <widget class="QCheckBox" name="sensor_12">
          <property name="styleSheet">
           <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
          </property>
@@ -598,7 +598,7 @@ QToolButton::pressed {
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_14">
+        <widget class="QCheckBox" name="sensor_13">
          <property name="styleSheet">
           <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
          </property>
@@ -608,7 +608,7 @@ QToolButton::pressed {
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_9">
+        <widget class="QCheckBox" name="sensor_14">
          <property name="styleSheet">
           <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
          </property>
@@ -618,7 +618,7 @@ QToolButton::pressed {
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_16">
+        <widget class="QCheckBox" name="sensor_15">
          <property name="styleSheet">
           <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
          </property>
@@ -628,7 +628,7 @@ QToolButton::pressed {
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_13">
+        <widget class="QCheckBox" name="sensor_16">
          <property name="styleSheet">
           <string notr="true">font: 12pt &quot;Tlwg Mono&quot;;</string>
          </property>
@@ -668,7 +668,7 @@ QToolButton::pressed {
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QProgressBar" name="progressBar">
+      <widget class="QProgressBar" name="battery_percentage">
        <property name="styleSheet">
         <string notr="true">QProgressBar {
 	font: bold 11pt &quot;Tlwg Mono&quot;;
@@ -711,7 +711,7 @@ QProgressBar::chunk {
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_4">
      <item alignment="Qt::AlignHCenter">
-      <widget class="QLabel" name="label_12">
+      <widget class="QLabel" name="lcd_mode_0">
        <property name="styleSheet">
         <string notr="true">font: bold 11pt &quot;Tlwg Mono&quot;;</string>
        </property>
@@ -721,7 +721,7 @@ QProgressBar::chunk {
       </widget>
      </item>
      <item alignment="Qt::AlignHCenter">
-      <widget class="QLabel" name="label_11">
+      <widget class="QLabel" name="lcd_mode_1">
        <property name="styleSheet">
         <string notr="true">font: bold 11pt &quot;Tlwg Mono&quot;;</string>
        </property>
@@ -731,7 +731,7 @@ QProgressBar::chunk {
       </widget>
      </item>
      <item alignment="Qt::AlignHCenter">
-      <widget class="QLabel" name="label_9">
+      <widget class="QLabel" name="lcd_error">
        <property name="styleSheet">
         <string notr="true">font: bold 11pt &quot;Tlwg Mono&quot;;</string>
        </property>
@@ -742,7 +742,7 @@ QProgressBar::chunk {
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -774,7 +774,7 @@ QProgressBar::chunk {
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="label_7">
+   <widget class="QLabel" name="led_battery">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -790,7 +790,7 @@ QProgressBar::chunk {
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_8">
+   <widget class="QLabel" name="led_armed">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -839,9 +839,9 @@ QProgressBar::chunk {
  <resources/>
  <connections>
   <connection>
-   <sender>horizontalSlider</sender>
+   <sender>battery_percentage_simulation</sender>
    <signal>sliderMoved(int)</signal>
-   <receiver>progressBar</receiver>
+   <receiver>battery_percentage</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -855,9 +855,9 @@ QProgressBar::chunk {
    </hints>
   </connection>
   <connection>
-   <sender>checkBox_2</sender>
+   <sender>sensor_2</sender>
    <signal>stateChanged(int)</signal>
-   <receiver>label_7</receiver>
+   <receiver>led_battery</receiver>
    <slot>hide()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -871,9 +871,9 @@ QProgressBar::chunk {
    </hints>
   </connection>
   <connection>
-   <sender>checkBox_2</sender>
+   <sender>sensor_2</sender>
    <signal>stateChanged(int)</signal>
-   <receiver>label_7</receiver>
+   <receiver>led_battery</receiver>
    <slot>show()</slot>
    <hints>
     <hint type="sourcelabel">
