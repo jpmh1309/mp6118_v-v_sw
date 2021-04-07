@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from keyboard import Keyboard
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -528,3 +528,12 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "BATERIA"))
         self.menuSISTEMA_DE_ALARMA.setTitle(_translate("MainWindow", "SISTEMA DE SEGURIDAD PARA HOGARES SSH-101"))
         self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar"))
+
+
+
+        self.key_1.clicked.connect(self.update_screen)
+
+    @QtCore.pyqtSlot()
+    def update_screen(self):
+        self.lcd_screen.display(1337)
+        Keyboard.print_keyboard(self)
