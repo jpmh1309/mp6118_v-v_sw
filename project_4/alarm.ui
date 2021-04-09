@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>768</width>
-    <height>457</height>
+    <height>593</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -459,9 +459,9 @@ QToolButton::pressed {
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>330</y>
-      <width>741</width>
-      <height>57</height>
+      <y>340</y>
+      <width>731</width>
+      <height>61</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -784,10 +784,13 @@ QProgressBar::chunk {
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QLabel {background-color : yellow; border-color : black; border-width : 1px; border-style : solid; border-radius : 10px; min-height: 20px; min-width: 20px}</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../../../Downloads/rsz_165-1653782_green-led-icon-png.png</pixmap>
     </property>
    </widget>
    <widget class="QLabel" name="led_armed">
@@ -800,10 +803,99 @@ QProgressBar::chunk {
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QLabel {background-color : yellow; border-color : black; border-width : 1px; border-style : solid; border-radius : 10px; min-height: 20px; min-width: 20px}</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../../../Downloads/rsz_165-1653782_green-led-icon-png.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>420</y>
+      <width>339</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: bold 11pt &quot;Tlwg Mono&quot;;</string>
+    </property>
+    <property name="text">
+     <string>SIMULACION ESTADO DE LA BOCINA </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>450</y>
+      <width>120</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px; 
+border-color: black;
+border-width: 2px;
+border-style: outset;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../../../Downloads/rsz_download.jpg</pixmap>
+    </property>
+   </widget>
+   <widget class="Line" name="line_2">
+    <property name="geometry">
+     <rect>
+      <x>-150</x>
+      <y>320</y>
+      <width>1051</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_3">
+    <property name="geometry">
+     <rect>
+      <x>-20</x>
+      <y>400</y>
+      <width>1051</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>450</y>
+      <width>120</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px; 
+border-color: black;
+border-width: 2px;
+border-style: outset;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../../../Downloads/rsz_11download.png</pixmap>
     </property>
    </widget>
   </widget>
