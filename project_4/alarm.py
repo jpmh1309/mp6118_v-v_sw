@@ -9,12 +9,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from keyboard import Keyboard
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(768, 457)
+        MainWindow.resize(768, 593)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.lcd_screen = QtWidgets.QLCDNumber(self.centralwidget)
@@ -313,7 +313,7 @@ class Ui_MainWindow(object):
         self.key_7.setObjectName("key_7")
         self.gridLayout.addWidget(self.key_7, 2, 0, 1, 1)
         self.layoutWidget3 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget3.setGeometry(QtCore.QRect(20, 330, 741, 57))
+        self.layoutWidget3.setGeometry(QtCore.QRect(20, 340, 731, 61))
         self.layoutWidget3.setObjectName("layoutWidget3")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.layoutWidget3)
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
@@ -454,14 +454,48 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.label_3, 0, QtCore.Qt.AlignHCenter)
         self.led_battery = QtWidgets.QLabel(self.centralwidget)
         self.led_battery.setGeometry(QtCore.QRect(260, 150, 41, 41))
-        self.led_battery.setStyleSheet("QLabel {background-color : yellow; border-color : black; border-width : 1px; border-style : solid; border-radius : 10px; min-height: 20px; min-width: 20px}")
+        self.led_battery.setStyleSheet("")
         self.led_battery.setText("")
+        self.led_battery.setPixmap(QtGui.QPixmap("../../../Downloads/rsz_165-1653782_green-led-icon-png.png"))
         self.led_battery.setObjectName("led_battery")
         self.led_armed = QtWidgets.QLabel(self.centralwidget)
         self.led_armed.setGeometry(QtCore.QRect(80, 150, 41, 41))
-        self.led_armed.setStyleSheet("QLabel {background-color : yellow; border-color : black; border-width : 1px; border-style : solid; border-radius : 10px; min-height: 20px; min-width: 20px}")
+        self.led_armed.setStyleSheet("")
         self.led_armed.setText("")
+        self.led_armed.setPixmap(QtGui.QPixmap("../../../Downloads/rsz_165-1653782_green-led-icon-png.png"))
         self.led_armed.setObjectName("led_armed")
+        self.label_7 = QtWidgets.QLabel(self.centralwidget)
+        self.label_7.setGeometry(QtCore.QRect(20, 420, 339, 28))
+        self.label_7.setStyleSheet("font: bold 11pt \"Tlwg Mono\";")
+        self.label_7.setObjectName("label_7")
+        self.label_9 = QtWidgets.QLabel(self.centralwidget)
+        self.label_9.setGeometry(QtCore.QRect(220, 450, 120, 80))
+        self.label_9.setStyleSheet("border-radius: 10px; \n"
+"border-color: black;\n"
+"border-width: 2px;\n"
+"border-style: outset;")
+        self.label_9.setText("")
+        self.label_9.setPixmap(QtGui.QPixmap("../../../Downloads/rsz_download.jpg"))
+        self.label_9.setObjectName("label_9")
+        self.line_2 = QtWidgets.QFrame(self.centralwidget)
+        self.line_2.setGeometry(QtCore.QRect(-150, 320, 1051, 20))
+        self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_2.setObjectName("line_2")
+        self.line_3 = QtWidgets.QFrame(self.centralwidget)
+        self.line_3.setGeometry(QtCore.QRect(-20, 400, 1051, 20))
+        self.line_3.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_3.setObjectName("line_3")
+        self.label_8 = QtWidgets.QLabel(self.centralwidget)
+        self.label_8.setGeometry(QtCore.QRect(450, 450, 120, 80))
+        self.label_8.setStyleSheet("border-radius: 10px; \n"
+"border-color: black;\n"
+"border-width: 2px;\n"
+"border-style: outset;")
+        self.label_8.setText("")
+        self.label_8.setPixmap(QtGui.QPixmap("../../../Downloads/rsz_11download.png"))
+        self.label_8.setObjectName("label_8")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 768, 22))
@@ -526,14 +560,6 @@ class Ui_MainWindow(object):
         self.lcd_error.setText(_translate("MainWindow", "ERROR"))
         self.label_4.setText(_translate("MainWindow", "ARMADA"))
         self.label_3.setText(_translate("MainWindow", "BATERIA"))
+        self.label_7.setText(_translate("MainWindow", "SIMULACION ESTADO DE LA BOCINA "))
         self.menuSISTEMA_DE_ALARMA.setTitle(_translate("MainWindow", "SISTEMA DE SEGURIDAD PARA HOGARES SSH-101"))
         self.toolBar.setWindowTitle(_translate("MainWindow", "toolBar"))
-
-
-
-        self.key_1.clicked.connect(self.update_screen)
-
-    @QtCore.pyqtSlot()
-    def update_screen(self):
-        self.lcd_screen.display(1337)
-        Keyboard.print_keyboard(self)
