@@ -19,7 +19,7 @@ class Alarm(object):
                 self.start_state_mode_1()
                 Registers.ACTIVE_SENSOR = Registers.ZONE_1
                 self.state = "MODE_1"
-        self.view.lcd_screen.display('----')
+        self.view.lcd_screen.display('*')
         self.view.led_battery.hide()
         self.view.led_armed.hide()
         print("ALARM in {} state".format(self.state))
