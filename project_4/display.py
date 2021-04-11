@@ -522,8 +522,7 @@ class Ui_MainWindow(object):
         self.battery_percentage_simulation.setValue(100)
 
         self.alarm = Alarm(self)
-
-        
+   
         self.key_1.clicked.connect(partial(self.key_clicked, self.key_1))
         self.key_2.clicked.connect(partial(self.key_clicked, self.key_2))
         self.key_3.clicked.connect(partial(self.key_clicked, self.key_3))
@@ -540,9 +539,6 @@ class Ui_MainWindow(object):
         self.key_fire.clicked.connect(partial(self.key_clicked, self.key_fire))
         self.key_panic.clicked.connect(partial(self.key_clicked, self.key_panic))
         self.key_escape.clicked.connect(partial(self.key_clicked, self.key_escape))
-
-
-
 
         self.sensor_1.clicked.connect(partial(self.sensor_activated, self.sensor_1))
         self.sensor_2.clicked.connect(partial(self.sensor_activated, self.sensor_2))
