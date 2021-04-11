@@ -535,10 +535,10 @@ class Ui_MainWindow(object):
         self.key_0.clicked.connect(partial(self.key_clicked, self.key_0))
         self.key_pound.clicked.connect(partial(self.key_clicked, self.key_pound))
         self.key_star.clicked.connect(partial(self.key_clicked, self.key_star))
-        self.key_enter.clicked.connect(partial(self.key_clicked, self.key_enter))
-        self.key_fire.clicked.connect(partial(self.key_clicked, self.key_fire))
-        self.key_panic.clicked.connect(partial(self.key_clicked, self.key_panic))
         self.key_escape.clicked.connect(partial(self.key_clicked, self.key_escape))
+        self.key_enter.clicked.connect(partial(self.key_clicked, self.key_enter))
+        self.key_panic.clicked.connect(partial(self.key_clicked, self.key_panic))
+        self.key_fire.clicked.connect(partial(self.key_clicked, self.key_fire))
 
         self.sensor_1.clicked.connect(partial(self.sensor_activated, self.sensor_1))
         self.sensor_2.clicked.connect(partial(self.sensor_activated, self.sensor_2))
@@ -557,8 +557,8 @@ class Ui_MainWindow(object):
         self.sensor_15.clicked.connect(partial(self.sensor_activated, self.sensor_15))
         self.sensor_16.clicked.connect(partial(self.sensor_activated, self.sensor_16))
 
-        self.battery_percentage.valueChanged.connect(self.battery_changed)
-    
+
+    # Function that reads information from the keyboard 
     def key_clicked(self,key):
         if (key == self.key_1): self.alarm.key_pressed('1')
         if (key == self.key_2): self.alarm.key_pressed('2')
@@ -572,11 +572,13 @@ class Ui_MainWindow(object):
         if (key == self.key_0): self.alarm.key_pressed('0')
         if (key == self.key_pound): self.alarm.key_pressed('#')
         if (key == self.key_star): self.alarm.key_pressed('*')
-        if (key == self.key_enter): self.alarm.key_pressed('ENTER')
         if (key == self.key_escape): self.alarm.key_pressed('ESC')
-        if (key == self.key_fire): self.alarm.key_pressed('FIRE')
+        if (key == self.key_enter): self.alarm.key_pressed('ENTER')
         if (key == self.key_panic): self.alarm.key_pressed('PANIC')
+        if (key == self.key_fire): self.alarm.key_pressed('FIRE')
 
+
+    # Function that reads information from the sensors button
     def sensor_activated(self,sensor):
         if (sensor == self.sensor_1 and self.sensor_1.isChecked()): self.alarm.sensor_activated(1)
         if (sensor == self.sensor_2 and self.sensor_2.isChecked()): self.alarm.sensor_activated(2)
@@ -598,6 +600,7 @@ class Ui_MainWindow(object):
     def battery_changed(self):
         self.alarm.check_battery()
 
+    # Retranslate UI
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))

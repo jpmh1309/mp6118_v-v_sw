@@ -17,6 +17,11 @@ class Alarm(object):
                 self.start_state_mode_0()
             elif(Registers.OP_MODE == 1):
                 self.start_state_mode_1()
+                Registers.ACTIVE_SENSOR = Registers.ZONE_1
+                self.state = "MODE_1"
+        self.view.lcd_screen.display('----')
+        self.view.led_battery.hide()
+        self.view.led_armed.hide()
         print("ALARM in {} state".format(self.state))
     
     def key_pressed(self,value):
@@ -25,7 +30,6 @@ class Alarm(object):
         else:
             pass
         print("ALARM in {} state".format(self.state))
-
 
     def sensor_activated(self, sensor):
         print("Sensor {} activated".format(sensor))
@@ -49,6 +53,7 @@ class Alarm(object):
         else:
             pass
         print("ALARM in {} state".format(self.state))
+
     def start_alarm(self,sensor = 1):
         self.state = "ALARM"
         self.keyboard.abort()
