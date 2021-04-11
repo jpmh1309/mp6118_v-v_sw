@@ -21,7 +21,7 @@ class Alarm(object):
         print("ALARM in {} state".format(self.state))
     
     def key_pressed(self,value):
-        if(self.state == "UNARMED" or self.state == "ARMED"):
+        if(self.state == "UNARMED" or self.state == "MODE_0" or self.state == "MODE_1"):
             self.keyboard.key_pressed(value)
         else:
             pass
