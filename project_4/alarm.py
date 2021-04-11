@@ -80,7 +80,6 @@ class Alarm(object):
         self.view.sound_activated.setHidden(True)
         self.view.sound_deactivated.setHidden(False)
 
-
     def start_state_unarmed(self):
         self.state = "UNARMED"
         self.view.led_armed.setHidden(True)
@@ -88,7 +87,6 @@ class Alarm(object):
         self.view.lcd_mode_1.setHidden(True)
         self.view.sound_activated.setHidden(True)
         self.view.sound_deactivated.setHidden(False)
-
 
     def check_battery(self):
         if(self.view.battery_percentage.value() < 50):
