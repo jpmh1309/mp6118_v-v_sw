@@ -521,6 +521,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         self.alarm = Alarm(self)
+
         self.key_1.clicked.connect(partial(self.key_clicked, self.key_1))
         self.key_2.clicked.connect(partial(self.key_clicked, self.key_2))
         self.key_3.clicked.connect(partial(self.key_clicked, self.key_3))
@@ -534,7 +535,22 @@ class Ui_MainWindow(object):
         self.key_pound.clicked.connect(partial(self.key_clicked, self.key_pound))
         self.key_star.clicked.connect(partial(self.key_clicked, self.key_star))
 
-
+        self.sensor_1.clicked.connect(partial(self.sensor_activated, self.sensor_1))
+        self.sensor_2.clicked.connect(partial(self.sensor_activated, self.sensor_2))
+        self.sensor_3.clicked.connect(partial(self.sensor_activated, self.sensor_3))
+        self.sensor_4.clicked.connect(partial(self.sensor_activated, self.sensor_4))
+        self.sensor_5.clicked.connect(partial(self.sensor_activated, self.sensor_5))
+        self.sensor_6.clicked.connect(partial(self.sensor_activated, self.sensor_6))
+        self.sensor_7.clicked.connect(partial(self.sensor_activated, self.sensor_7))
+        self.sensor_8.clicked.connect(partial(self.sensor_activated, self.sensor_8))
+        self.sensor_9.clicked.connect(partial(self.sensor_activated, self.sensor_9))
+        self.sensor_10.clicked.connect(partial(self.sensor_activated, self.sensor_10))
+        self.sensor_11.clicked.connect(partial(self.sensor_activated, self.sensor_11))
+        self.sensor_12.clicked.connect(partial(self.sensor_activated, self.sensor_12))
+        self.sensor_13.clicked.connect(partial(self.sensor_activated, self.sensor_13))
+        self.sensor_14.clicked.connect(partial(self.sensor_activated, self.sensor_14))
+        self.sensor_15.clicked.connect(partial(self.sensor_activated, self.sensor_15))
+        self.sensor_16.clicked.connect(partial(self.sensor_activated, self.sensor_16))
 
 
     
@@ -552,6 +568,25 @@ class Ui_MainWindow(object):
         if (key == self.key_pound): self.alarm.key_pressed('#')
         if (key == self.key_star): self.alarm.key_pressed('*')
 
+    def sensor_activated(self,sensor):
+        print(sensor == self.sensor_1)
+        print(self.sensor_1.isChecked())
+        if (sensor == self.sensor_1 and self.sensor_1.isChecked()): self.alarm.sensor_activated(1)
+        if (sensor == self.sensor_2 and self.sensor_2.isChecked()): self.alarm.sensor_activated(2)
+        if (sensor == self.sensor_3 and self.sensor_3.isChecked()): self.alarm.sensor_activated(3)
+        if (sensor == self.sensor_4 and self.sensor_4.isChecked()): self.alarm.sensor_activated(4)
+        if (sensor == self.sensor_5 and self.sensor_5.isChecked()): self.alarm.sensor_activated(5)
+        if (sensor == self.sensor_6 and self.sensor_6.isChecked()): self.alarm.sensor_activated(6)
+        if (sensor == self.sensor_7 and self.sensor_7.isChecked()): self.alarm.sensor_activated(7)
+        if (sensor == self.sensor_8 and self.sensor_8.isChecked()): self.alarm.sensor_activated(8)
+        if (sensor == self.sensor_9 and self.sensor_9.isChecked()): self.alarm.sensor_activated(9)
+        if (sensor == self.sensor_10 and self.sensor_10.isChecked()): self.alarm.sensor_activated(10)
+        if (sensor == self.sensor_11 and self.sensor_11.isChecked()): self.alarm.sensor_activated(11)
+        if (sensor == self.sensor_12 and self.sensor_12.isChecked()): self.alarm.sensor_activated(12)
+        if (sensor == self.sensor_13 and self.sensor_14.isChecked()): self.alarm.sensor_activated(13)
+        if (sensor == self.sensor_14 and self.sensor_15.isChecked()): self.alarm.sensor_activated(14)
+        if (sensor == self.sensor_15 and self.sensor_16.isChecked()): self.alarm.sensor_activated(15)
+        if (sensor == self.sensor_16 and self.sensor_17.isChecked()): self.alarm.sensor_activated(16)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

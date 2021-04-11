@@ -15,3 +15,5 @@ class Keyboard(object):
         print("Keyboard reading register: ALARM_STATE: {}".format(Registers.ALARM_STATE))
         print("Keyboard Changing register: ALARM_STATE to UNARMED")
         Registers.ALARM_STATE = "UNARMED"
+    def abort(self):
+        pass
