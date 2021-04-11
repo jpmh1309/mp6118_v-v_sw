@@ -1,9 +1,10 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication
 import sys
-import alarm
+import display
+from registers import Registers 
 
-class ExampleApp(QtWidgets.QMainWindow, alarm.Ui_MainWindow):
+class ExampleApp(QtWidgets.QMainWindow, display.Ui_MainWindow):
     def __init__(self, parent=None):
         super(ExampleApp, self).__init__(parent)
         self.setupUi(self)
