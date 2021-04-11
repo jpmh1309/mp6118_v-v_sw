@@ -471,15 +471,15 @@ class Ui_MainWindow(object):
         self.label_7.setGeometry(QtCore.QRect(20, 420, 339, 28))
         self.label_7.setStyleSheet("font: bold 11pt \"Tlwg Mono\";")
         self.label_7.setObjectName("label_7")
-        self.label_9 = QtWidgets.QLabel(self.centralwidget)
-        self.label_9.setGeometry(QtCore.QRect(220, 450, 120, 80))
-        self.label_9.setStyleSheet("border-radius: 10px; \n"
+        self.sound_activated = QtWidgets.QLabel(self.centralwidget)
+        self.sound_activated.setGeometry(QtCore.QRect(220, 450, 120, 80))
+        self.sound_activated.setStyleSheet("border-radius: 10px; \n"
 "border-color: black;\n"
 "border-width: 2px;\n"
 "border-style: outset;")
-        self.label_9.setText("")
-        self.label_9.setPixmap(QtGui.QPixmap("./icon/rsz_download.jpg"))
-        self.label_9.setObjectName("label_9")
+        self.sound_activated.setText("")
+        self.sound_activated.setPixmap(QtGui.QPixmap("./icon/rsz_download.jpg"))
+        self.sound_activated.setObjectName("sound_activated")
         self.line_2 = QtWidgets.QFrame(self.centralwidget)
         self.line_2.setGeometry(QtCore.QRect(-150, 320, 1051, 20))
         self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
@@ -490,15 +490,15 @@ class Ui_MainWindow(object):
         self.line_3.setFrameShape(QtWidgets.QFrame.HLine)
         self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_3.setObjectName("line_3")
-        self.label_8 = QtWidgets.QLabel(self.centralwidget)
-        self.label_8.setGeometry(QtCore.QRect(450, 450, 120, 80))
-        self.label_8.setStyleSheet("border-radius: 10px; \n"
+        self.sound_deactivated = QtWidgets.QLabel(self.centralwidget)
+        self.sound_deactivated.setGeometry(QtCore.QRect(450, 450, 120, 80))
+        self.sound_deactivated.setStyleSheet("border-radius: 10px; \n"
 "border-color: black;\n"
 "border-width: 2px;\n"
 "border-style: outset;")
-        self.label_8.setText("")
-        self.label_8.setPixmap(QtGui.QPixmap("./icon/rsz_11download.png"))
-        self.label_8.setObjectName("label_8")
+        self.sound_deactivated.setText("")
+        self.sound_deactivated.setPixmap(QtGui.QPixmap("./icon/rsz_11download.png"))
+        self.sound_deactivated.setObjectName("sound_deactivated")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 768, 22))
@@ -516,12 +516,14 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.battery_percentage_simulation.sliderMoved['int'].connect(self.battery_percentage.setValue)
-        self.sensor_2.stateChanged['int'].connect(self.led_battery.hide)
-        self.sensor_3.stateChanged['int'].connect(self.led_battery.show)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+
+        self.battery_percentage_simulation.setValue(100)
 
         self.alarm = Alarm(self)
 
+        
         self.key_1.clicked.connect(partial(self.key_clicked, self.key_1))
         self.key_2.clicked.connect(partial(self.key_clicked, self.key_2))
         self.key_3.clicked.connect(partial(self.key_clicked, self.key_3))
@@ -534,6 +536,13 @@ class Ui_MainWindow(object):
         self.key_0.clicked.connect(partial(self.key_clicked, self.key_0))
         self.key_pound.clicked.connect(partial(self.key_clicked, self.key_pound))
         self.key_star.clicked.connect(partial(self.key_clicked, self.key_star))
+        self.key_enter.clicked.connect(partial(self.key_clicked, self.key_enter))
+        self.key_fire.clicked.connect(partial(self.key_clicked, self.key_fire))
+        self.key_panic.clicked.connect(partial(self.key_clicked, self.key_panic))
+        self.key_escape.clicked.connect(partial(self.key_clicked, self.key_escape))
+
+
+
 
         self.sensor_1.clicked.connect(partial(self.sensor_activated, self.sensor_1))
         self.sensor_2.clicked.connect(partial(self.sensor_activated, self.sensor_2))
@@ -552,7 +561,7 @@ class Ui_MainWindow(object):
         self.sensor_15.clicked.connect(partial(self.sensor_activated, self.sensor_15))
         self.sensor_16.clicked.connect(partial(self.sensor_activated, self.sensor_16))
 
-
+        self.battery_percentage.valueChanged.connect(self.battery_changed)
     
     def key_clicked(self,key):
         if (key == self.key_1): self.alarm.key_pressed('1')
@@ -567,10 +576,12 @@ class Ui_MainWindow(object):
         if (key == self.key_0): self.alarm.key_pressed('0')
         if (key == self.key_pound): self.alarm.key_pressed('#')
         if (key == self.key_star): self.alarm.key_pressed('*')
+        if (key == self.key_enter): self.alarm.key_pressed('ENTER')
+        if (key == self.key_escape): self.alarm.key_pressed('ESC')
+        if (key == self.key_fire): self.alarm.key_pressed('FIRE')
+        if (key == self.key_panic): self.alarm.key_pressed('PANIC')
 
     def sensor_activated(self,sensor):
-        print(sensor == self.sensor_1)
-        print(self.sensor_1.isChecked())
         if (sensor == self.sensor_1 and self.sensor_1.isChecked()): self.alarm.sensor_activated(1)
         if (sensor == self.sensor_2 and self.sensor_2.isChecked()): self.alarm.sensor_activated(2)
         if (sensor == self.sensor_3 and self.sensor_3.isChecked()): self.alarm.sensor_activated(3)
@@ -587,6 +598,9 @@ class Ui_MainWindow(object):
         if (sensor == self.sensor_14 and self.sensor_15.isChecked()): self.alarm.sensor_activated(14)
         if (sensor == self.sensor_15 and self.sensor_16.isChecked()): self.alarm.sensor_activated(15)
         if (sensor == self.sensor_16 and self.sensor_17.isChecked()): self.alarm.sensor_activated(16)
+
+    def battery_changed(self):
+        self.alarm.check_battery()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
