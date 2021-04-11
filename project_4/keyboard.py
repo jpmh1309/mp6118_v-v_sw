@@ -6,8 +6,8 @@ class Keyboard(object):
         print("Keyboard State: {}".format(self.state))
     def key_pressed(self,value):
         if(self.state == "INACTIVE"):
-            if(value in list(range(0,9))):
-                if(egisters.ALERT):
+            if(value in ['1','2','3','4','5','6','7','8','9','0']):
+                if(Registers.ALERT):
                     self.state = "ALARM_CONDITION"
         print("Keyboard State: {}".format(self.state))
     def print_keyboard(view):

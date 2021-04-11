@@ -12,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from keyboard import Keyboard
 from registers import Registers
 from alarm import Alarm
+from functools import partial
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         
@@ -519,27 +520,38 @@ class Ui_MainWindow(object):
         self.sensor_2.stateChanged['int'].connect(self.led_battery.show)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-
-        self.key_1.clicked.connect(self.key_1_clicked)
-        '''
-        self.key_2.clicked.connect(self.key_2_clicked)
-        self.key_3.clicked.connect(self.key_3_clicked)
-        self.key_4.clicked.connect(self.key_4_clicked)
-        self.key_5.clicked.connect(self.key_5_clicked)
-        self.key_6.clicked.connect(self.key_6_clicked)
-        self.key_7.clicked.connect(self.key_7_clicked)
-        self.key_8.clicked.connect(self.key_8_clicked)
-        self.key_9.clicked.connect(self.key_9_clicked)
-        self.key_0.clicked.connect(self.key_0_clicked)
-        self.key_pound.clicked.connect(self.key_pound_clicked)
-        self.key_star.clicked.connect(self.key_star_clicked)
-        '''
         self.alarm = Alarm(self)
+        self.key_1.clicked.connect(partial(self.key_clicked, self.key_1))
+        self.key_2.clicked.connect(partial(self.key_clicked, self.key_2))
+        self.key_3.clicked.connect(partial(self.key_clicked, self.key_3))
+        self.key_4.clicked.connect(partial(self.key_clicked, self.key_4))
+        self.key_5.clicked.connect(partial(self.key_clicked, self.key_5))
+        self.key_6.clicked.connect(partial(self.key_clicked, self.key_6))
+        self.key_7.clicked.connect(partial(self.key_clicked, self.key_7))
+        self.key_8.clicked.connect(partial(self.key_clicked, self.key_8))
+        self.key_9.clicked.connect(partial(self.key_clicked, self.key_9))
+        self.key_0.clicked.connect(partial(self.key_clicked, self.key_0))
+        self.key_pound.clicked.connect(partial(self.key_clicked, self.key_pound))
+        self.key_star.clicked.connect(partial(self.key_clicked, self.key_star))
+
+
 
 
     
-    def key_1_clicked(self):
-        self.alarm.key_pressed(1)
+    def key_clicked(self,key):
+        if (key == self.key_1): self.alarm.key_pressed('1')
+        if (key == self.key_2): self.alarm.key_pressed('2')
+        if (key == self.key_3): self.alarm.key_pressed('3')
+        if (key == self.key_4): self.alarm.key_pressed('4')
+        if (key == self.key_5): self.alarm.key_pressed('5')
+        if (key == self.key_6): self.alarm.key_pressed('6')
+        if (key == self.key_7): self.alarm.key_pressed('7')
+        if (key == self.key_8): self.alarm.key_pressed('8')
+        if (key == self.key_9): self.alarm.key_pressed('9')
+        if (key == self.key_0): self.alarm.key_pressed('0')
+        if (key == self.key_pound): self.alarm.key_pressed('#')
+        if (key == self.key_star): self.alarm.key_pressed('*')
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
