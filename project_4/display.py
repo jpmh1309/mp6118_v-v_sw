@@ -22,7 +22,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.lcd_screen = QtWidgets.QLCDNumber(self.centralwidget)
         self.lcd_screen.setGeometry(QtCore.QRect(20, 60, 271, 81))
-        self.lcd_screen.setStyleSheet("font: bold 11pt \"Tlwg Mono\";")
+        self.lcd_screen.setStyleSheet("font: bold 4pt \"Tlwg Mono\";")
         self.lcd_screen.setObjectName("lcd_screen")
         self.line = QtWidgets.QFrame(self.centralwidget)
         self.line.setGeometry(QtCore.QRect(-90, 250, 1051, 20))
@@ -557,6 +557,7 @@ class Ui_MainWindow(object):
         self.sensor_15.clicked.connect(partial(self.sensor_activated, self.sensor_15))
         self.sensor_16.clicked.connect(partial(self.sensor_activated, self.sensor_16))
 
+        self.battery_percentage.valueChanged.connect(self.battery_changed)
 
     # Function that reads information from the keyboard 
     def key_clicked(self,key):
