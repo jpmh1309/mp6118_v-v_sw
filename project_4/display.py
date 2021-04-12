@@ -557,6 +557,7 @@ class Ui_MainWindow(object):
         self.sensor_15.clicked.connect(partial(self.sensor_activated, self.sensor_15))
         self.sensor_16.clicked.connect(partial(self.sensor_activated, self.sensor_16))
 
+        self.battery_percentage.valueChanged.connect(self.battery_changed)
 
     # Function that reads information from the keyboard 
     def key_clicked(self,key):
