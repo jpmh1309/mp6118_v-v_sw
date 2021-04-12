@@ -24,6 +24,7 @@ class Ui_MainWindow(object):
         self.lcd_screen.setGeometry(QtCore.QRect(20, 60, 271, 81))
         self.lcd_screen.setStyleSheet("font: bold 4pt \"Tlwg Mono\";")
         self.lcd_screen.setObjectName("lcd_screen")
+        self.lcd_screen.setDigitCount(8)
         self.line = QtWidgets.QFrame(self.centralwidget)
         self.line.setGeometry(QtCore.QRect(-90, 250, 1051, 20))
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
