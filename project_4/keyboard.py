@@ -64,17 +64,22 @@ class Keyboard(object):
                             self.alarm_active(value)
 
                         if Registers.TEMP_PIN == (Registers.PIN + DISABLED_SEQ):
-                            Registers.ALARM_MODE = Alarm_Mode.CHANGE_NUMBER
+                            Registers.ALARM_MODE = Alarm_Mode.DISABLED
                             self.disable_emergency(value)                      
                 
                     if Registers.KEY_COUNT >= 8:
                         print("Error")
-                                    # Clean LCD display 
+                        # Clean LCD display 
                         self.view.lcd_screen.display('*')
                         self.reset_keyboard()
+
                 # Operation Mode: Changing PIN
                 elif Registers.ALARM_MODE == Alarm_Mode.CHANGE_PIN:
                     self.change_pin(value)
+
+                # Operation Mode: Changing emergency number
+                elif Registers.ALARM_MODE == Alarm_Mode.CHANGE_NUMBER:
+                    self.change_phone_number(value)
             
             elif value in ['FIRE', 'PANIC']:
                 if value == 'FIRE':
@@ -116,19 +121,22 @@ class Keyboard(object):
         Registers.ALARM_MODE = Alarm_Mode.NONE
         Registers.KEY_COUNT = 0
         Registers.TEMP_PIN = []
-        Registers.IN_CHANGE_MODE = False 
+        Registers.IN_CHANGE_PIN = False 
         Registers.NEW_PIN = []
         Registers.NEW_PIN_COUNT = 0
         Registers.NEW_PIN_CONFIRMATION = []
         Registers.NEW_PIN_CONFIRMATION_COUNT = 0
         Registers.CONFIRMATION = False
+        Registers.IN_CHANGE_NUMBER = False
+        Registers.TEMP_CALL_CENTER_NUMBER = []
+        Registers.NEW_NUMBER_COUNT = 0
 
     # LLR-013, LLR-014, LLR-015, LLR-016, LLR-017
     def change_pin(self, value):
         print("CHANGE PIN MODE")
-        if not Registers.IN_CHANGE_MODE:
+        if not Registers.IN_CHANGE_PIN:
             print("CHANGE PIN MODE")
-            Registers.IN_CHANGE_MODE = True
+            Registers.IN_CHANGE_PIN = True
             # Clean LCD display 
             self.view.lcd_screen.display('*')
         else:
@@ -162,6 +170,7 @@ class Keyboard(object):
                 elif value == 'ENTER' and Registers.NEW_PIN_CONFIRMATION_COUNT == 4:
                     if Registers.NEW_PIN == Registers.NEW_PIN_CONFIRMATION: 
                         print("New pin change successfully")
+                        # self.view.lcd_screen.display('OK') 
                         Registers.PIN = Registers.NEW_PIN
                         self.reset_keyboard()
                     else:
@@ -182,6 +191,33 @@ class Keyboard(object):
     # LLR-018, LLR-019, LLR-020, LLR-021, LLR-022, LLR-023, LLR-024, LLR-025, LLR-026, LLR-027
     def change_phone_number(self, value):
         print("CHANGE PHONE NUMBER")
+        if not Registers.IN_CHANGE_NUMBER:
+            Registers.IN_CHANGE_NUMBER = True
+            # Clean LCD display 
+            self.view.lcd_screen.display('*')
+        else:
+            if value in ['1','2','3','4','5','6','7','8','9','0'] and Registers.NEW_NUMBER_COUNT < 8:
+                Registers.NEW_NUMBER_COUNT+=1
+                Registers.TEMP_CALL_CENTER_NUMBER.append(value)
+                self.view.lcd_screen.display(''.join(Registers.TEMP_CALL_CENTER_NUMBER))   
+            elif value == '*':
+                Registers.NEW_NUMBER_COUNT-=1
+                Registers.TEMP_CALL_CENTER_NUMBER.pop()
+                self.view.lcd_screen.display(''.join(Registers.TEMP_CALL_CENTER_NUMBER)) 
+            elif value == 'ENTER' and Registers.NEW_NUMBER_COUNT == 8:
+                print("New number change successfully")
+                Registers.CALL_CENTER_NUMBER = Registers.TEMP_CALL_CENTER_NUMBER
+                self.view.lcd_screen.display('OK')
+                self.reset_keyboard() 
+            else: 
+                print("Invalid input or failed to change number.")
+                print("Error")
+                self.reset_keyboard()
+
+        # Debug prints
+        print("Registers.TEMP_CALL_CENTER_NUMBER:", Registers.TEMP_CALL_CENTER_NUMBER)
+        print("Registers.NEW_NUMBER_COUNT:", Registers.NEW_NUMBER_COUNT)
+        print("Registers.CALL_CENTER_NUMBER:", Registers.CALL_CENTER_NUMBER)
 
     # LLR-028, LLR-029, LLR-030, LLR-031, LLR-032, LLR-033, LLR-034, LLR-035, LLR-036, LLR-037, 
     # LLR-038, LLR-039, LLR-040, LLR-041
