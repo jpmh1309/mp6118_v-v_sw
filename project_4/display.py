@@ -13,24 +13,26 @@ from keyboard import Keyboard
 from registers import Registers
 from alarm import Alarm
 from functools import partial
+
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(768, 593)
+        MainWindow.resize(912, 593)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.lcd_screen = QtWidgets.QLCDNumber(self.centralwidget)
-        self.lcd_screen.setGeometry(QtCore.QRect(20, 60, 271, 81))
-        self.lcd_screen.setStyleSheet("font: bold 4pt \"Tlwg Mono\";")
+        self.lcd_screen.setGeometry(QtCore.QRect(20, 60, 411, 81))
+        self.lcd_screen.setStyleSheet("font: bold 11pt \"Tlwg Mono\";")
         self.lcd_screen.setObjectName("lcd_screen")
+        self.lcd_screen.setDigitCount(8)
         self.line = QtWidgets.QFrame(self.centralwidget)
         self.line.setGeometry(QtCore.QRect(-90, 250, 1051, 20))
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
         self.layoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget.setGeometry(QtCore.QRect(630, 10, 131, 231))
+        self.layoutWidget.setGeometry(QtCore.QRect(780, 10, 131, 231))
         self.layoutWidget.setObjectName("layoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -52,7 +54,7 @@ class Ui_MainWindow(object):
         self.key_fire.setObjectName("key_fire")
         self.verticalLayout.addWidget(self.key_fire)
         self.layoutWidget1 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget1.setGeometry(QtCore.QRect(20, 270, 341, 51))
+        self.layoutWidget1.setGeometry(QtCore.QRect(20, 270, 401, 51))
         self.layoutWidget1.setObjectName("layoutWidget1")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.layoutWidget1)
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -80,7 +82,7 @@ class Ui_MainWindow(object):
         self.battery_percentage_simulation.setObjectName("battery_percentage_simulation")
         self.verticalLayout_2.addWidget(self.battery_percentage_simulation)
         self.layoutWidget2 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget2.setGeometry(QtCore.QRect(380, 10, 241, 231))
+        self.layoutWidget2.setGeometry(QtCore.QRect(530, 10, 241, 231))
         self.layoutWidget2.setObjectName("layoutWidget2")
         self.gridLayout = QtWidgets.QGridLayout(self.layoutWidget2)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -316,7 +318,7 @@ class Ui_MainWindow(object):
         self.key_7.setObjectName("key_7")
         self.gridLayout.addWidget(self.key_7, 2, 0, 1, 1)
         self.layoutWidget3 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget3.setGeometry(QtCore.QRect(20, 340, 731, 61))
+        self.layoutWidget3.setGeometry(QtCore.QRect(20, 340, 881, 61))
         self.layoutWidget3.setObjectName("layoutWidget3")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.layoutWidget3)
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
@@ -393,12 +395,12 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.addWidget(self.sensor_16)
         self.verticalLayout_3.addLayout(self.horizontalLayout_3)
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(21, 31, 16, 17))
+        self.label_2.setGeometry(QtCore.QRect(161, 31, 16, 17))
         self.label_2.setStyleSheet("font: 11pt bold \"Tlwg Mono\";")
         self.label_2.setText("")
         self.label_2.setObjectName("label_2")
         self.layoutWidget4 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget4.setGeometry(QtCore.QRect(20, 20, 341, 35))
+        self.layoutWidget4.setGeometry(QtCore.QRect(20, 20, 481, 35))
         self.layoutWidget4.setObjectName("layoutWidget4")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.layoutWidget4)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -424,7 +426,7 @@ class Ui_MainWindow(object):
         self.label_6.setObjectName("label_6")
         self.horizontalLayout.addWidget(self.label_6)
         self.layoutWidget5 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget5.setGeometry(QtCore.QRect(290, 60, 71, 81))
+        self.layoutWidget5.setGeometry(QtCore.QRect(430, 60, 71, 81))
         self.layoutWidget5.setObjectName("layoutWidget5")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.layoutWidget5)
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
@@ -442,7 +444,7 @@ class Ui_MainWindow(object):
         self.lcd_error.setObjectName("lcd_error")
         self.verticalLayout_4.addWidget(self.lcd_error, 0, QtCore.Qt.AlignHCenter)
         self.layoutWidget6 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget6.setGeometry(QtCore.QRect(20, 200, 351, 41))
+        self.layoutWidget6.setGeometry(QtCore.QRect(70, 200, 351, 41))
         self.layoutWidget6.setObjectName("layoutWidget6")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.layoutWidget6)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -456,13 +458,13 @@ class Ui_MainWindow(object):
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_2.addWidget(self.label_3, 0, QtCore.Qt.AlignHCenter)
         self.led_battery = QtWidgets.QLabel(self.centralwidget)
-        self.led_battery.setGeometry(QtCore.QRect(260, 150, 41, 41))
+        self.led_battery.setGeometry(QtCore.QRect(310, 150, 41, 41))
         self.led_battery.setStyleSheet("")
         self.led_battery.setText("")
         self.led_battery.setPixmap(QtGui.QPixmap("./icon/rsz_165-1653782_green-led-icon-png.png"))
         self.led_battery.setObjectName("led_battery")
         self.led_armed = QtWidgets.QLabel(self.centralwidget)
-        self.led_armed.setGeometry(QtCore.QRect(80, 150, 41, 41))
+        self.led_armed.setGeometry(QtCore.QRect(130, 150, 41, 41))
         self.led_armed.setStyleSheet("")
         self.led_armed.setText("")
         self.led_armed.setPixmap(QtGui.QPixmap("./icon/rsz_165-1653782_green-led-icon-png.png"))
@@ -472,7 +474,7 @@ class Ui_MainWindow(object):
         self.label_7.setStyleSheet("font: bold 11pt \"Tlwg Mono\";")
         self.label_7.setObjectName("label_7")
         self.sound_activated = QtWidgets.QLabel(self.centralwidget)
-        self.sound_activated.setGeometry(QtCore.QRect(220, 450, 120, 80))
+        self.sound_activated.setGeometry(QtCore.QRect(310, 440, 120, 80))
         self.sound_activated.setStyleSheet("border-radius: 10px; \n"
 "border-color: black;\n"
 "border-width: 2px;\n"
@@ -481,7 +483,7 @@ class Ui_MainWindow(object):
         self.sound_activated.setPixmap(QtGui.QPixmap("./icon/rsz_download.jpg"))
         self.sound_activated.setObjectName("sound_activated")
         self.line_2 = QtWidgets.QFrame(self.centralwidget)
-        self.line_2.setGeometry(QtCore.QRect(-150, 320, 1051, 20))
+        self.line_2.setGeometry(QtCore.QRect(-120, 320, 1051, 20))
         self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
         self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_2.setObjectName("line_2")
@@ -491,7 +493,7 @@ class Ui_MainWindow(object):
         self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_3.setObjectName("line_3")
         self.sound_deactivated = QtWidgets.QLabel(self.centralwidget)
-        self.sound_deactivated.setGeometry(QtCore.QRect(450, 450, 120, 80))
+        self.sound_deactivated.setGeometry(QtCore.QRect(540, 440, 120, 80))
         self.sound_deactivated.setStyleSheet("border-radius: 10px; \n"
 "border-color: black;\n"
 "border-width: 2px;\n"
@@ -501,7 +503,7 @@ class Ui_MainWindow(object):
         self.sound_deactivated.setObjectName("sound_deactivated")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 768, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 912, 22))
         self.menubar.setObjectName("menubar")
         self.menuSISTEMA_DE_ALARMA = QtWidgets.QMenu(self.menubar)
         self.menuSISTEMA_DE_ALARMA.setObjectName("menuSISTEMA_DE_ALARMA")
@@ -516,8 +518,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.battery_percentage_simulation.sliderMoved['int'].connect(self.battery_percentage.setValue)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
+        QtCore.QMetaObject.connectSlotsByName(MainWindow) 
 
         self.battery_percentage_simulation.setValue(100)
 
