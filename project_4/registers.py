@@ -9,7 +9,7 @@ class Alarm_Mode(Enum):
     CHANGE_NUMBER_FIRE = 4
     CHANGE_NUMBER_PANIC = 5
     ARMED_ACTIVE = 6
-    ALARM_ACTIVE = 7
+    DISARMED_ACTIVE = 7
     FIRE_ACTIVE = 8
     PANIC_ACTIVE = 9
     DISABLED = 10
@@ -17,7 +17,7 @@ class Alarm_Mode(Enum):
     # ERROR = 11
 
 class Registers(object):
-    ALARM_STATE = "ARMED"
+    ALARM_STATE = "UNARMED"
     OP_MODE = 0
     ACTIVE_SENSOR = [1]
     USER_NUMBER = 1
@@ -39,4 +39,6 @@ class Registers(object):
     ERROR_STATE: False
     KEY_COUNT = 0
     ALARM_MODE = Alarm_Mode.NONE
+    IN_ARMED_SELECT = False
+    MODE_SELECTED = False
     

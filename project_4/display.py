@@ -602,6 +602,12 @@ class Ui_MainWindow(object):
     def battery_changed(self):
         self.alarm.check_battery()
 
+    def start_alarm(self, sensor):
+        self.alarm.start_alarm(sensor)
+
+    def refresh_alarm(self):
+        self.alarm.refresh_alarm()
+
     # Retranslate UI
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
