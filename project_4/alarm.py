@@ -19,7 +19,7 @@ class Alarm(object):
                 self.start_state_mode_1()
                 # Registers.ACTIVE_SENSOR = Registers.ZONE_1
                 # self.state = "MODE_1"
-        self.view.lcd_screen.display('Error')
+        # self.view.lcd_screen.display('ok')
         # self.view.led_battery.hide()
         # self.view.led_armed.hide()
         print("ALARM in {} state".format(self.state))
@@ -94,7 +94,7 @@ class Alarm(object):
         self.view.sound_deactivated.setHidden(False)
 
     def check_battery(self):
-        if(self.view.battery_percentage.value() < 50):
+        if(self.view.battery_percentage.value() > 50):
             self.view.led_battery.setHidden(True)
         else:
             self.view.led_battery.setHidden(False)

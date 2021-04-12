@@ -6,7 +6,7 @@ PROGRAMMING_ZONES_SEQ = ['*', '*', 'ENTER']
 CHANGE_PIN_SEQ = ['*', '#', 'ENTER']
 CHANGE_NUMBER_SEQ = ['#', '*', 'ENTER']
 ARMED_SEQ = ['*', 'ENTER']
-ALARM_SEQ = ['#', 'ENTER']
+DISARMED_SEQ = ['#', 'ENTER']
 DISABLED_SEQ = ['ENTER']
 
 class Keyboard(object):
@@ -33,7 +33,7 @@ class Keyboard(object):
                     if(value in ['*', '#', 'ENTER']) and Registers.KEY_COUNT <= 4:
                         # Registers.KEY_COUNT = 0
                         # Registers.TEMP_PIN = []
-                        reset_keyboard(self)
+                        self.reset_keyboard()
 
                     # LLR-019
                     if Registers.KEY_COUNT <= 4:
@@ -59,9 +59,9 @@ class Keyboard(object):
                             Registers.ALARM_MODE = Alarm_Mode.ARMED_ACTIVE
                             self.armed_system(value)
 
-                        if Registers.TEMP_PIN == (Registers.PIN + ALARM_SEQ):
-                            Registers.ALARM_MODE = Alarm_Mode.ALARM_ACTIVE
-                            self.alarm_active(value)
+                        if Registers.TEMP_PIN == (Registers.PIN + DISARMED_SEQ):
+                            Registers.ALARM_MODE = Alarm_Mode.DISARMED_ACTIVE
+                            self.disarmed_system()
 
                         if Registers.TEMP_PIN == (Registers.PIN + DISABLED_SEQ):
                             Registers.ALARM_MODE = Alarm_Mode.DISABLED
@@ -73,23 +73,34 @@ class Keyboard(object):
                         self.view.lcd_screen.display('*')
                         self.reset_keyboard()
 
-                # Operation Mode: Changing PIN
-                elif Registers.ALARM_MODE == Alarm_Mode.CHANGE_PIN:
-                    self.change_pin(value)
+                # Operation Mode: Changing zones of the sensors
+                elif Registers.ALARM_MODE == Alarm_Mode.CHANGE_ZONES:
+                    self.change_zones(value)
 
                 # Operation Mode: Changing emergency number
                 elif Registers.ALARM_MODE == Alarm_Mode.CHANGE_NUMBER:
                     self.change_phone_number(value)
-            
+      
+                # Operation Mode: Changing PIN
+                elif Registers.ALARM_MODE == Alarm_Mode.CHANGE_PIN:
+                    self.change_pin(value)
+
+                # Operation Mode: Selecting armed mode 0 or mode 1 
+                elif Registers.ALARM_MODE == Alarm_Mode.ARMED_ACTIVE:
+                    self.armed_system(value)
+
             elif value in ['FIRE', 'PANIC']:
                 if value == 'FIRE':
                     Registers.ALARM_MODE = Alarm_Mode.FIRE_ACTIVE
+                    self.view.start_alarm("fire")
                 else:
                     Registers.ALARM_MODE = Alarm_Mode.PANIC_ACTIVE
+                    self.view.start_alarm("panic")
 
                 # if(Registers.ALERT):
                 #    self.state = "ALARM_CONDITION"
                 print("Fire or Panic")
+                # self.view.refresh_alarm()
                 self.reset_keyboard()
             # LLR-024, LLR-039, LLR-051, LLR-059, LLR-065,  
             elif value == 'ESC':
@@ -130,6 +141,9 @@ class Keyboard(object):
         Registers.IN_CHANGE_NUMBER = False
         Registers.TEMP_CALL_CENTER_NUMBER = []
         Registers.NEW_NUMBER_COUNT = 0
+        Registers.IN_ARMED_SELECT = False
+        Registers.MODE_SELECTED = False
+
 
     # LLR-013, LLR-014, LLR-015, LLR-016, LLR-017
     def change_pin(self, value):
@@ -188,7 +202,8 @@ class Keyboard(object):
             print("Registers.NEW_PIN_CONFIRMATION:", Registers.NEW_PIN_CONFIRMATION)
             print("Registers.NEW_PIN_CONFIRMATION_COUNT:", Registers.NEW_PIN_CONFIRMATION_COUNT)
      
-    # LLR-018, LLR-019, LLR-020, LLR-021, LLR-022, LLR-023, LLR-024, LLR-025, LLR-026, LLR-027
+    # LLR-042, LLR-043, LLR-044, LLR-045, LLR-046, LLR-047, LLR-048, LLR-049, LLR-050, 
+    # LLR-051, LLR-052, LLR-053, LLR-054
     def change_phone_number(self, value):
         print("CHANGE PHONE NUMBER")
         if not Registers.IN_CHANGE_NUMBER:
@@ -219,18 +234,49 @@ class Keyboard(object):
         print("Registers.NEW_NUMBER_COUNT:", Registers.NEW_NUMBER_COUNT)
         print("Registers.CALL_CENTER_NUMBER:", Registers.CALL_CENTER_NUMBER)
 
-    # LLR-028, LLR-029, LLR-030, LLR-031, LLR-032, LLR-033, LLR-034, LLR-035, LLR-036, LLR-037, 
-    # LLR-038, LLR-039, LLR-040, LLR-041
+    # LLR-055, LLR-056, LLR-057, LLR-058, LLR-059, LLR-060
     def armed_system(self, value):
-        print("CHANGE PHONE NUMBER")
+        print("ARMED SYSTEM")
+        if not Registers.IN_ARMED_SELECT:
+            Registers.ALARM_STATE = "ARMED"
+            self.view.refresh_alarm()
+            Registers.IN_ARMED_SELECT = True
+        else:
+            # mode 0 or 1
+            if value == '0':
+                Registers.OP_MODE = 0
+                Registers.MODE_SELECTED = True
+            elif value == '1':
+                Registers.OP_MODE = 1
+                Registers.MODE_SELECTED = True
+            elif value == 'ENTER' and Registers.MODE_SELECTED:
+                print("ok")
+                self.view.refresh_alarm()
+                self.reset_keyboard()
+                self.reset_keyboard()
+            else:
+                print("Invalid input or failed to change number.")
+                print("Error")
+                self.reset_keyboard()
 
-    # LLR-042, LLR-043, LLR-044, LLR-045, LLR-046, LLR-047, LLR-048, LLR-049, LLR-050, LLR-051,
-    # LLR-052, LLR-053, LLR-054
-    def alarm_active(self, value):
-        print("CHANGE PHONE NUMBER")
+    def disarmed_system(self):
+        print("DISARMED SYSTEM")
+        Registers.ALARM_STATE = "UNARMED"
+        Registers.OP_MODE = 0
+        self.view.refresh_alarm()
+        self.reset_keyboard()
+
+    # LLR-061, LLR-062, LLR-063, LLR-064, LLR-065, LLR-066
+    # def disarmed_system(self, value):
+    #    print("ALARM ACTIVE")
+    #    self.reset_keyboard()
     
     def disable_emergency(self, value):
-        print("DISABLE EMERGENCY")
+        print("DISABLED EMERGENCY")
+        self.view.refresh_alarm()
+        self.reset_keyboard()
 
+    # LLR-028, LLR-029, LLR-030, LLR-031, LLR-032, LLR-033, LLR-034, 
+    # LLR-035, LLR-036, LLR-037, LLR-038, LLR-039, LLR-040, LLR-041
     def change_zones(self, value):
         print("CHANGE ZONES")
