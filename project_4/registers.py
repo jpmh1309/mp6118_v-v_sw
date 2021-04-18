@@ -13,6 +13,8 @@ class Alarm_Mode(Enum):
     FIRE_ACTIVE = 8
     PANIC_ACTIVE = 9
     DISABLED = 10
+    CHANGE_ZONES_0 = 11
+    CHANGE_ZONES_1 = 12
     # EMERGENCY_ACTIVE = 10
     # ERROR = 11
 
@@ -26,7 +28,14 @@ class Registers(object):
     NEW_NUMBER_COUNT = 0
     IN_CHANGE_NUMBER = False
     PIN = ['1', '2', '3', '4']
-    ZONE_1 = [1]
+    ZONE_0 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+    ZONE_1 = []
+    IN_CHANGE_ZONE = False
+    IN_CHANGE_ZONE_0 = False
+    IN_CHANGE_ZONE_1 = False
+    IN_CHANGE_ZONE_COUNT = 0
+    SENSOR_COUNT = 0
+    SENSOR_NUMBER = []
     ALERT = False
     MAIN_ENTRANCE = 1
     TEMP_PIN = []
