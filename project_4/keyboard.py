@@ -133,6 +133,10 @@ class Keyboard(object):
         Registers.KEY_COUNT = 0
         Registers.TEMP_PIN = []
         Registers.IN_CHANGE_PIN = False 
+        Registers.IN_CHANGE_ZONE = False
+        Registers.IN_CHANGE_ZONE_0 = False
+        Registers.IN_CHANGE_ZONE_1 = False
+        Registers.IN_CHANGE_ZONE_COUNT = 0   
         Registers.NEW_PIN = []
         Registers.NEW_PIN_COUNT = 0
         Registers.NEW_PIN_CONFIRMATION = []
@@ -143,6 +147,68 @@ class Keyboard(object):
         Registers.NEW_NUMBER_COUNT = 0
         Registers.IN_ARMED_SELECT = False
         Registers.MODE_SELECTED = False
+        Registers.MODE_SELECTED = False
+        Registers.SENSOR_COUNT = 0
+        Registers.SENSOR_NUMBER = []
+
+    # LLR-028, LLR-029, LLR-030, LLR-031, LLR-032, LLR-033, LLR-034, 
+    # LLR-035, LLR-036, LLR-037, LLR-038, LLR-039, LLR-040, LLR-041
+    def change_zones(self, value):
+        print("CHANGE ZONES")
+        if not Registers.IN_CHANGE_ZONE:
+            Registers.IN_CHANGE_ZONE = True
+            # Clean LCD display 
+            self.view.lcd_screen.display('*')
+        else:
+            if Registers.CONFIRMATION == False:
+                if value == '0' and Registers.IN_CHANGE_ZONE_COUNT < 1:
+                    print("ZONE 0")
+                    Registers.IN_CHANGE_ZONE_COUNT+=1
+                    Registers.IN_CHANGE_ZONE_0 = True
+                    self.view.lcd_screen.display(value)
+                elif value == '1' and Registers.IN_CHANGE_ZONE_COUNT < 1:
+                    print("ZONE 1")
+                    Registers.IN_CHANGE_ZONE_COUNT+=1
+                    Registers.IN_CHANGE_ZONE_1 = True
+                    self.view.lcd_screen.display(value)
+                elif value == 'ENTER' and Registers.IN_CHANGE_ZONE_COUNT == 1:
+                    Registers.CONFIRMATION = True
+                    self.view.lcd_screen.display('*')
+                else:
+                    print("Invalid zone.")
+                    print("Error")
+                    self.reset_keyboard()
+            else:
+                print("Waiting sensor(s) to change")
+                if value in ['1','2','3','4','5','6','7','8','9'] and Registers.SENSOR_COUNT < 1:
+                    Registers.SENSOR_COUNT+=1
+                    Registers.SENSOR_NUMBER.append(value)
+                    self.view.lcd_screen.display(value)  
+                elif value in ['1','2','3','4','5','6','0'] and Registers.SENSOR_COUNT == 1:
+                    Registers.SENSOR_NUMBER.append(value)
+                    self.view.lcd_screen.display(''.join(Registers.SENSOR_NUMBER))  
+                elif value == 'ENTER' and Registers.SENSOR_COUNT == 1:
+                    sensor = int(''.join(Registers.SENSOR_NUMBER))
+                    if Registers.IN_CHANGE_ZONE_0:
+                        print("Moving to zone 0")
+                        if not sensor in Registers.ZONE_0:
+                            Registers.ZONE_0.append(sensor)
+                            Registers.ZONE_1.remove(sensor)
+                            print("Sensor to change: ", sensor)
+
+                    if Registers.IN_CHANGE_ZONE_1:
+                        print("Moving to zone 1")
+                        if not sensor in Registers.ZONE_1:
+                            Registers.ZONE_1.append(sensor)
+                            Registers.ZONE_0.remove(sensor)
+                            print("Sensor to change: ", sensor)
+                    
+                    Registers.SENSOR_COUNT = 0
+                    Registers.SENSOR_NUMBER = []
+                else:
+                    print("Invalid sensor number. It should be beetwen 1-16.")
+                    print("Error")
+                    self.reset_keyboard() 
 
 
     # LLR-013, LLR-014, LLR-015, LLR-016, LLR-017
@@ -275,8 +341,3 @@ class Keyboard(object):
         print("DISABLED EMERGENCY")
         self.view.refresh_alarm()
         self.reset_keyboard()
-
-    # LLR-028, LLR-029, LLR-030, LLR-031, LLR-032, LLR-033, LLR-034, 
-    # LLR-035, LLR-036, LLR-037, LLR-038, LLR-039, LLR-040, LLR-041
-    def change_zones(self, value):
-        print("CHANGE ZONES")
