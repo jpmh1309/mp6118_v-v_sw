@@ -23,7 +23,6 @@ class Keyboard(object):
         logger.info("Keyboard State: {}".format(self.state))
 
     def key_pressed(self,value):
-        # logger.info(PROGRAMMING_ZONES_SEQ)
 
         if(self.state == "INACTIVE"):
 
@@ -95,7 +94,7 @@ class Keyboard(object):
                 # Operation Mode: Selecting armed mode 0 or mode 1 
                 elif Registers.ALARM_MODE == Alarm_Mode.ARMED_ACTIVE:
                     self.armed_system(value)
-
+            # LLR-061, LLR-062, LLR-063, LLR-064, LLR-065, LLR-066
             elif value in ['FIRE', 'PANIC']:
                 if value == 'FIRE':
                     Registers.ALARM_MODE = Alarm_Mode.FIRE_ACTIVE
@@ -104,28 +103,17 @@ class Keyboard(object):
                     Registers.ALARM_MODE = Alarm_Mode.PANIC_ACTIVE
                     self.view.start_alarm("panic")
 
-                # if(Registers.ALERT):
-                #    self.state = "ALARM_CONDITION"
                 logger.info("Fire or Panic")
-                # self.view.refresh_alarm()
                 self.reset_keyboard()
+
             # LLR-024, LLR-039, LLR-051, LLR-059, LLR-065,  
             elif value == 'ESC':
-                # self.view.lcd_screen.display('Esc')
                 self.view.display_lcd("Esc", 3)
                 self.reset_keyboard()
-                # time.sleep(2)
-                # event = threading.Event()
-                # event.wait(1)
-                # self.view.lcd_screen.display(value)
-                #self.view.lcd_screen.display('*')
                 logger.info("Escape")
-            # elif value == 'ENTER':
-            #    logger.info("Enter")
 
         logger.info("Keyboard State: {}".format(self.state))
         logger.info("Registers.TEMP_PIN: {}".format(Registers.TEMP_PIN))
-        # self.view.lcd_screen.display(value)
     
     def print_keyboard(self, view):
         view.lcd_screen.display(1337)
@@ -160,8 +148,8 @@ class Keyboard(object):
         Registers.SENSOR_NUMBER = []
         self.view.stop_blink_led(self.view.led_battery)
 
-    # LLR-028, LLR-029, LLR-030, LLR-031, LLR-032, LLR-033, LLR-034, 
-    # LLR-035, LLR-036, LLR-037, LLR-038, LLR-039, LLR-040, LLR-041
+    # LLR-018, LLR-019, LLR-020, LLR-021, LLR-022, LLR-023, LLR-024,
+    # LLR-025, LLR-026, LLR-027
     def change_zones(self, value):
         logger.info("CHANGE ZONES")
         if not Registers.IN_CHANGE_ZONE:
@@ -223,7 +211,8 @@ class Keyboard(object):
                     self.reset_keyboard() 
 
 
-    # LLR-013, LLR-014, LLR-015, LLR-016, LLR-017
+    # LLR-028, LLR-029, LLR-030, LLR-031, LLR-032, LLR-033, LLR-034, 
+    # LLR-035, LLR-036, LLR-037, LLR-038, LLR-039, LLR-040, LLR-041
     def change_pin(self, value):
         logger.info("CHANGE PIN MODE")
         if not Registers.IN_CHANGE_PIN:
