@@ -32,8 +32,8 @@ class Registers(object):
     NEW_NUMBER_COUNT = 0
     IN_CHANGE_NUMBER = False
     PIN = ['1', '2', '3', '4']
-    ZONE_0 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
-    ZONE_1 = []
+    ZONE_0 = []
+    ZONE_1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
     IN_CHANGE_ZONE = False
     IN_CHANGE_ZONE_0 = False
     IN_CHANGE_ZONE_1 = False

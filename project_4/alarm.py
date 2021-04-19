@@ -45,9 +45,9 @@ class Alarm(object):
         logger.info("ALARM in {} state".format(self.state))
         logger.info("Active sensors {}".format(Registers.ACTIVE_SENSOR))
         if(sensor in Registers.ACTIVE_SENSOR):
-            if(self.state == "MODE_1"):
+            if(self.state == "MODE_0"):
                 self.start_alarm(sensor)
-            elif(self.state == "MODE_0"):
+            elif(self.state == "MODE_1"):
                 self.keyboard.abort()
                 if(sensor == Registers.MAIN_ENTRANCE):
                     self.state = "MAIN_ENTRANCE"
@@ -61,6 +61,7 @@ class Alarm(object):
             pass
         logger.info("ALARM in {} state".format(self.state))
 
+    # LLR.085, LLR-086
     def start_alarm(self,sensor = 1):
         self.state = "ALARM"
         self.keyboard.abort()
@@ -74,6 +75,7 @@ class Alarm(object):
         )
         logger.info("ALARM in {} state".format(self.state))
 
+    # LLR-067, LLR-068, LLR-069, LLR-070, LLR-071, LLR-072
     def start_state_mode_0(self):
         # ACTIVE_SENSORS are all the sensors.
         Registers.ACTIVE_SENSOR = Registers.ZONE_0
@@ -85,6 +87,8 @@ class Alarm(object):
         self.view.sound_activated.setHidden(True)
         self.view.sound_deactivated.setHidden(False)
 
+    # LLR-073, LLR-074, LLR-075, LLR-076, LLR-077, LLR-078, LLR-079, 
+    # LLR-080, LLR-081, LLR-082, LLR-083
     def start_state_mode_1(self):
         Registers.ACTIVE_SENSOR = Registers.ZONE_1
         logger.info("Registers.ACTIVE_SENSOR: {}".format(Registers.ACTIVE_SENSOR))
@@ -103,6 +107,7 @@ class Alarm(object):
         self.view.sound_activated.setHidden(True)
         self.view.sound_deactivated.setHidden(False)
 
+    # LLR-015
     def check_battery(self):
         if(self.view.battery_percentage.value() > 50):
             self.view.led_battery.setHidden(True)
