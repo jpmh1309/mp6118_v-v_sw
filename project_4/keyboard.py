@@ -1,6 +1,13 @@
+# MP-6118 Validation and Verification in Software Engineering
+# Students: 
+#           - David Martínez
+#           - Jose Martínez
+# Project:  Smart Embedded Systems Security Alarm  
 from registers import Registers, Alarm_Mode
-import time 
-#import threading
+import logging
+import time
+
+logger = logging.getLogger(__name__) 
 
 PROGRAMMING_ZONES_SEQ = ['*', '*', 'ENTER']
 CHANGE_PIN_SEQ = ['*', '#', 'ENTER']
@@ -13,10 +20,10 @@ class Keyboard(object):
     def __init__(self, view):
         self.view = view
         self.state = "INACTIVE"
-        print("Keyboard State: {}".format(self.state))
+        logger.info("Keyboard State: {}".format(self.state))
 
     def key_pressed(self,value):
-        # print(PROGRAMMING_ZONES_SEQ)
+        # logger.info(PROGRAMMING_ZONES_SEQ)
 
         if(self.state == "INACTIVE"):
 
@@ -41,7 +48,7 @@ class Keyboard(object):
                     
                     # Check sequence to see it is valid for any mode
                     if 4 < Registers.KEY_COUNT < 8:
-                        print("Checking sequence")
+                        logger.info("Checking sequence")
 
                         if Registers.TEMP_PIN == (Registers.PIN + PROGRAMMING_ZONES_SEQ):
                             Registers.ALARM_MODE = Alarm_Mode.CHANGE_ZONES
@@ -68,9 +75,9 @@ class Keyboard(object):
                             self.disable_emergency(value)                      
                 
                     if Registers.KEY_COUNT >= 8:
-                        print("Error")
-                        # Clean LCD display 
-                        self.view.lcd_screen.display('*')
+                        logger.info("Error")
+                        # Clean LCD display
+                        self.print_error()
                         self.reset_keyboard()
 
                 # Operation Mode: Changing zones of the sensors
@@ -99,30 +106,31 @@ class Keyboard(object):
 
                 # if(Registers.ALERT):
                 #    self.state = "ALARM_CONDITION"
-                print("Fire or Panic")
+                logger.info("Fire or Panic")
                 # self.view.refresh_alarm()
                 self.reset_keyboard()
             # LLR-024, LLR-039, LLR-051, LLR-059, LLR-065,  
             elif value == 'ESC':
-                self.view.lcd_screen.display('Esc')
+                # self.view.lcd_screen.display('Esc')
+                self.view.display_lcd("Esc", 3)
                 self.reset_keyboard()
                 # time.sleep(2)
                 # event = threading.Event()
                 # event.wait(1)
                 # self.view.lcd_screen.display(value)
                 #self.view.lcd_screen.display('*')
-                print("Escape")
+                logger.info("Escape")
             # elif value == 'ENTER':
-            #    print("Enter")
+            #    logger.info("Enter")
 
-        print("Keyboard State: {}".format(self.state))
-        print("Registers.TEMP_PIN: {}".format(Registers.TEMP_PIN))
+        logger.info("Keyboard State: {}".format(self.state))
+        logger.info("Registers.TEMP_PIN: {}".format(Registers.TEMP_PIN))
         # self.view.lcd_screen.display(value)
     
     def print_keyboard(self, view):
         view.lcd_screen.display(1337)
-        print("Keyboard reading register: ALARM_STATE: {}".format(Registers.ALARM_STATE))
-        print("Keyboard Changing register: ALARM_STATE to UNARMED")
+        logger.info("Keyboard reading register: ALARM_STATE: {}".format(Registers.ALARM_STATE))
+        logger.info("Keyboard Changing register: ALARM_STATE to UNARMED")
         Registers.ALARM_STATE = "UNARMED"
     
     def abort(self):
@@ -150,24 +158,26 @@ class Keyboard(object):
         Registers.MODE_SELECTED = False
         Registers.SENSOR_COUNT = 0
         Registers.SENSOR_NUMBER = []
+        self.view.stop_blink_led(self.view.led_battery)
 
     # LLR-028, LLR-029, LLR-030, LLR-031, LLR-032, LLR-033, LLR-034, 
     # LLR-035, LLR-036, LLR-037, LLR-038, LLR-039, LLR-040, LLR-041
     def change_zones(self, value):
-        print("CHANGE ZONES")
+        logger.info("CHANGE ZONES")
         if not Registers.IN_CHANGE_ZONE:
+            self.view.blink_led(self.view.led_battery, 0.5)
             Registers.IN_CHANGE_ZONE = True
             # Clean LCD display 
             self.view.lcd_screen.display('*')
         else:
             if Registers.CONFIRMATION == False:
                 if value == '0' and Registers.IN_CHANGE_ZONE_COUNT < 1:
-                    print("ZONE 0")
+                    logger.info("ZONE 0")
                     Registers.IN_CHANGE_ZONE_COUNT+=1
                     Registers.IN_CHANGE_ZONE_0 = True
                     self.view.lcd_screen.display(value)
                 elif value == '1' and Registers.IN_CHANGE_ZONE_COUNT < 1:
-                    print("ZONE 1")
+                    logger.info("ZONE 1")
                     Registers.IN_CHANGE_ZONE_COUNT+=1
                     Registers.IN_CHANGE_ZONE_1 = True
                     self.view.lcd_screen.display(value)
@@ -175,11 +185,12 @@ class Keyboard(object):
                     Registers.CONFIRMATION = True
                     self.view.lcd_screen.display('*')
                 else:
-                    print("Invalid zone.")
-                    print("Error")
+                    logger.info("Invalid zone.")
+                    logger.info("Error")
+                    self.print_error()
                     self.reset_keyboard()
             else:
-                print("Waiting sensor(s) to change")
+                logger.info("Waiting sensor(s) to change")
                 if value in ['1','2','3','4','5','6','7','8','9'] and Registers.SENSOR_COUNT < 1:
                     Registers.SENSOR_COUNT+=1
                     Registers.SENSOR_NUMBER.append(value)
@@ -190,32 +201,34 @@ class Keyboard(object):
                 elif value == 'ENTER' and Registers.SENSOR_COUNT == 1:
                     sensor = int(''.join(Registers.SENSOR_NUMBER))
                     if Registers.IN_CHANGE_ZONE_0:
-                        print("Moving to zone 0")
+                        logger.info("Moving to zone 0")
                         if not sensor in Registers.ZONE_0:
                             Registers.ZONE_0.append(sensor)
                             Registers.ZONE_1.remove(sensor)
-                            print("Sensor to change: ", sensor)
+                            logger.info("Sensor to change: {}".format(sensor))
 
                     if Registers.IN_CHANGE_ZONE_1:
-                        print("Moving to zone 1")
+                        logger.info("Moving to zone 1")
                         if not sensor in Registers.ZONE_1:
                             Registers.ZONE_1.append(sensor)
                             Registers.ZONE_0.remove(sensor)
-                            print("Sensor to change: ", sensor)
+                            logger.info("Sensor to change: {}".format(sensor))
                     
                     Registers.SENSOR_COUNT = 0
                     Registers.SENSOR_NUMBER = []
                 else:
-                    print("Invalid sensor number. It should be beetwen 1-16.")
-                    print("Error")
+                    logger.info("Invalid sensor number. It should be beetwen 1-16.")
+                    logger.info("Error")
+                    self.print_error()
                     self.reset_keyboard() 
 
 
     # LLR-013, LLR-014, LLR-015, LLR-016, LLR-017
     def change_pin(self, value):
-        print("CHANGE PIN MODE")
+        logger.info("CHANGE PIN MODE")
         if not Registers.IN_CHANGE_PIN:
-            print("CHANGE PIN MODE")
+            logger.info("CHANGE PIN MODE")
+            self.view.blink_led(self.view.led_battery, 0.5)
             Registers.IN_CHANGE_PIN = True
             # Clean LCD display 
             self.view.lcd_screen.display('*')
@@ -232,8 +245,9 @@ class Keyboard(object):
                 elif value == 'ENTER' and Registers.NEW_PIN_COUNT == 4:
                     Registers.CONFIRMATION = True
                 else:
-                    print("Invalid input.")
-                    print("Error")
+                    logger.info("Invalid input.")
+                    logger.info("Error")
+                    self.print_error()
                     self.reset_keyboard()
             else:
                 # Clean LCD display
@@ -249,30 +263,33 @@ class Keyboard(object):
                     self.view.lcd_screen.display('-'*Registers.NEW_PIN_CONFIRMATION_COUNT)  
                 elif value == 'ENTER' and Registers.NEW_PIN_CONFIRMATION_COUNT == 4:
                     if Registers.NEW_PIN == Registers.NEW_PIN_CONFIRMATION: 
-                        print("New pin change successfully")
+                        logger.info("New pin change successfully")
                         # self.view.lcd_screen.display('OK') 
                         Registers.PIN = Registers.NEW_PIN
                         self.reset_keyboard()
                     else:
-                        print("New pin and its confirmation don't match")
-                        print("Error")
+                        logger.info("New pin and its confirmation don't match")
+                        logger.info("Error")
+                        self.print_error()
                         self.reset_keyboard()
                 else: 
-                    print("Invalid input.")
-                    print("Error")
+                    logger.info("Invalid input.")
+                    logger.info("Error")
+                    self.print_error()
                     self.reset_keyboard()
 
             # Debug prints
-            print("Registers.NEW_PIN:", Registers.NEW_PIN)
-            print("Registers.NEW_PIN_COUNT:", Registers.NEW_PIN_COUNT)
-            print("Registers.NEW_PIN_CONFIRMATION:", Registers.NEW_PIN_CONFIRMATION)
-            print("Registers.NEW_PIN_CONFIRMATION_COUNT:", Registers.NEW_PIN_CONFIRMATION_COUNT)
+            logger.info("Registers.NEW_PIN: {}".format(Registers.NEW_PIN))
+            logger.info("Registers.NEW_PIN_COUNT: {}".format(Registers.NEW_PIN_COUNT))
+            logger.info("Registers.NEW_PIN_CONFIRMATION: {}".format(Registers.NEW_PIN_CONFIRMATION))
+            logger.info("Registers.NEW_PIN_CONFIRMATION_COUNT: {}".format(Registers.NEW_PIN_CONFIRMATION_COUNT))
      
     # LLR-042, LLR-043, LLR-044, LLR-045, LLR-046, LLR-047, LLR-048, LLR-049, LLR-050, 
     # LLR-051, LLR-052, LLR-053, LLR-054
     def change_phone_number(self, value):
-        print("CHANGE PHONE NUMBER")
+        logger.info("CHANGE PHONE NUMBER")
         if not Registers.IN_CHANGE_NUMBER:
+            self.view.blink_led(self.view.led_battery, 0.5)
             Registers.IN_CHANGE_NUMBER = True
             # Clean LCD display 
             self.view.lcd_screen.display('*')
@@ -286,23 +303,24 @@ class Keyboard(object):
                 Registers.TEMP_CALL_CENTER_NUMBER.pop()
                 self.view.lcd_screen.display(''.join(Registers.TEMP_CALL_CENTER_NUMBER)) 
             elif value == 'ENTER' and Registers.NEW_NUMBER_COUNT == 8:
-                print("New number change successfully")
+                logger.info("New number change successfully")
                 Registers.CALL_CENTER_NUMBER = Registers.TEMP_CALL_CENTER_NUMBER
                 self.view.lcd_screen.display('OK')
                 self.reset_keyboard() 
             else: 
-                print("Invalid input or failed to change number.")
-                print("Error")
+                logger.info("Invalid input or failed to change number.")
+                logger.info("Error")
+                self.print_error()
                 self.reset_keyboard()
 
         # Debug prints
-        print("Registers.TEMP_CALL_CENTER_NUMBER:", Registers.TEMP_CALL_CENTER_NUMBER)
-        print("Registers.NEW_NUMBER_COUNT:", Registers.NEW_NUMBER_COUNT)
-        print("Registers.CALL_CENTER_NUMBER:", Registers.CALL_CENTER_NUMBER)
+        logger.info("Registers.TEMP_CALL_CENTER_NUMBER: {}".format(Registers.TEMP_CALL_CENTER_NUMBER))
+        logger.info("Registers.NEW_NUMBER_COUNT: {}".format(Registers.NEW_NUMBER_COUNT))
+        logger.info("Registers.CALL_CENTER_NUMBER: {}".format(Registers.CALL_CENTER_NUMBER))
 
     # LLR-055, LLR-056, LLR-057, LLR-058, LLR-059, LLR-060
     def armed_system(self, value):
-        print("ARMED SYSTEM")
+        logger.info("ARMED SYSTEM")
         if not Registers.IN_ARMED_SELECT:
             Registers.ALARM_STATE = "ARMED"
             self.view.refresh_alarm()
@@ -316,28 +334,29 @@ class Keyboard(object):
                 Registers.OP_MODE = 1
                 Registers.MODE_SELECTED = True
             elif value == 'ENTER' and Registers.MODE_SELECTED:
-                print("ok")
+                logger.info("ok")
                 self.view.refresh_alarm()
                 self.reset_keyboard()
                 self.reset_keyboard()
             else:
-                print("Invalid input or failed to change number.")
-                print("Error")
+                logger.info("Invalid input or failed to change number.")
+                logger.info("Error")
+                self.print_error()
                 self.reset_keyboard()
 
+    # LLR-061, LLR-062, LLR-063, LLR-064, LLR-065, LLR-066
     def disarmed_system(self):
-        print("DISARMED SYSTEM")
+        logger.info("DISARMED SYSTEM")
         Registers.ALARM_STATE = "UNARMED"
         Registers.OP_MODE = 0
         self.view.refresh_alarm()
         self.reset_keyboard()
-
-    # LLR-061, LLR-062, LLR-063, LLR-064, LLR-065, LLR-066
-    # def disarmed_system(self, value):
-    #    print("ALARM ACTIVE")
-    #    self.reset_keyboard()
     
     def disable_emergency(self, value):
-        print("DISABLED EMERGENCY")
+        logger.info("DISABLED EMERGENCY")
         self.view.refresh_alarm()
         self.reset_keyboard()
+
+    def print_error(self):
+        self.view.stop_blink_led(self.view.led_battery)
+        self.view.display_lcd("Error", 3)
