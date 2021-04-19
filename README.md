@@ -1,6 +1,7 @@
 # Costa Rica Institute of Technology                         
 # MP-6118 Validation and Verification in Software Engineering
-### How to run in Windowss
+
+### How to run in Windows
 
 1) Install Python> https://www.python.org/downloads/ 
 2) Clone this repo.
@@ -8,6 +9,8 @@
 5) run py -m pip pyqt5
 6) run py main.py
 
+### SSD, SRD, LLR, & Traceability Matrix
+project_1_2_3/Requerimientos\ de\ SW\ .pdf
 
 ###  Students:   
                                        
