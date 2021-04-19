@@ -1,3 +1,9 @@
+# Costa Rica Institute of Technology
+# MP-6118 Validation and Verification in Software Engineering
+# Students: 
+#           - David Martínez
+#           - Jose Martínez
+# Project:  Smart Embedded Systems Security Alarm  
 from enum import Enum, unique
 
 @unique
@@ -15,8 +21,6 @@ class Alarm_Mode(Enum):
     DISABLED = 10
     CHANGE_ZONES_0 = 11
     CHANGE_ZONES_1 = 12
-    # EMERGENCY_ACTIVE = 10
-    # ERROR = 11
 
 class Registers(object):
     ALARM_STATE = "UNARMED"
