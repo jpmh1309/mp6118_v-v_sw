@@ -12,6 +12,9 @@
 ### SSD, SRD, LLR, & Traceability Matrix
 project_1_2_3/Requerimientos\ de\ SW\ .pdf
 
+### SES
+project_5/Plan de Verificación - SES.pdf
+
 ###  Students:   
                                        
 - David Martínez
